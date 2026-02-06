@@ -1,0 +1,34 @@
+
+#  Digital Store – Backend
+
+Este repositório contém o **backend** do projeto **Digital Store**, desenvolvido como atividade final do curso de **Formação em Desenvolvedor Full Stack – Projeto Geração Tech**.
+
+A aplicação consiste em uma **API REST**, responsável por fornecer os dados utilizados no frontend.
+
+##  Sobre o Projeto
+
+O backend é responsável pelo gerenciamento de:
+
+- Usuários  
+- Categorias  
+- Produtos  
+- Autenticação  
+
+---
+
+## Tecnologias Utilizadas
+
+- Node.js  
+- Express  
+- Sequelize  
+- MySQL  
+- JWT  
+
+---
+
+##  Como Executar
+
+```bash
+npm install
+npm start
+
