@@ -2,11 +2,11 @@
   "name": "gtech-projeto-final",
   "version": "1.0.0",
   "description": "Projeto final GTECH",
-  "main": "backend/src/server.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node backend/src/server.js",
+    "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "test": "teste"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
