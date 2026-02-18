@@ -1,34 +1,74 @@
+# Digital Store – Backend
 
-#  Digital Store – Backend
+API REST do projeto **Digital Store** (atividade final do curso **Formação em Desenvolvedor Full Stack – Projeto Geração Tech**).
 
-Este repositório contém o **backend** do projeto **Digital Store**, desenvolvido como atividade final do curso de **Formação em Desenvolvedor Full Stack – Projeto Geração Tech**.
+Gerencia:
+- Usuários
+- Categorias
+- Produtos
+- Autenticação (JWT)
 
-A aplicação consiste em uma **API REST**, responsável por fornecer os dados utilizados no frontend.
+## Tecnologias
+- Node.js
+- Express
+- Sequelize
+- MySQL
+- JWT
 
-##  Sobre o Projeto
+## Pré-requisitos
+- Node.js + npm
+- MySQL rodando (local ou remoto)
 
-O backend é responsável pelo gerenciamento de:
+## Configuração (.env)
+Crie um arquivo `.env` na pasta `backend/` com:
 
-- Usuários  
-- Categorias  
-- Produtos  
-- Autenticação  
+```env
+DB_HOST=localhost
+DB_NAME=digital_store
+DB_USER=root
+DB_PASS=senha
 
----
+JWT_SECRET=sua_chave_secreta
 
-## Tecnologias Utilizadas
+# opcionais
+PORT=3000
+CORS_ORIGIN=http://localhost:3001
+```
 
-- Node.js  
-- Express  
-- Sequelize  
-- MySQL  
-- JWT  
+Observações:
+- O banco de dados (schema) precisa existir no MySQL (`DB_NAME`).
+- As tabelas são criadas/atualizadas automaticamente ao iniciar (o projeto usa `sequelize.sync()`).
 
----
+## Como executar
 
-##  Como Executar
-
+Instalar dependências:
 ```bash
 npm install
+```
+
+Rodar em desenvolvimento (recarrega com nodemon):
+```bash
+npm run dev
+```
+
+Rodar em produção:
+```bash
 npm start
+```
+
+Ao subir, a API fica disponível em:
+- http://localhost:3000
+
+## Rotas principais
+Prefixo base: `/v1`
+
+- Auth: `/v1/auth`
+- Usuários: `/v1/user`
+- Categorias: `/v1/category`
+- Produtos: `/v1/product`
+
+Rotas protegidas exigem header:
+```http
+Authorization: Bearer <token>
+```
 
