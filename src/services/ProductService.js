@@ -1,4 +1,5 @@
 const { Op } = require('sequelize');
+const sequelize = require('../config/database');
 const { Product, Category, ProductImage, ProductOption, ProductCategory } = require('../models');
 
 class ProductService {
@@ -147,6 +148,24 @@ class ProductService {
       limit: isAll ? -1 : numericLimit,
       page: numericPage,
     };
+  }
+
+  static async delete(id) {
+    if (!Number.isFinite(id)) {
+      throw new Error('ID inválido');
+    }
+
+    return sequelize.transaction(async (transaction) => {
+      const product = await Product.findByPk(id, { transaction });
+      if (!product) return false;
+
+      await ProductImage.destroy({ where: { product_id: id }, transaction });
+      await ProductOption.destroy({ where: { product_id: id }, transaction });
+      await ProductCategory.destroy({ where: { product_id: id }, transaction });
+
+      await Product.destroy({ where: { id }, transaction });
+      return true;
+    });
   }
 }
 
