@@ -29,6 +29,35 @@ class UserService {
 
     return user;
   }
+
+  static async update(id, updateData) {
+    const user = await User.findByPk(id);
+    if (!user) return null;
+
+    const data = { ...(updateData || {}) };
+    delete data.id;
+
+    if (data.password) {
+      data.password = await bcrypt.hash(data.password, 10);
+    }
+
+    await user.update(data);
+
+    return {
+      id: user.id,
+      firstname: user.firstname,
+      surname: user.surname,
+      email: user.email,
+    };
+  }
+
+  static async delete(id) {
+    const user = await User.findByPk(id);
+    if (!user) return false;
+
+    await user.destroy();
+    return true;
+  }
 }
 
 module.exports = UserService;
