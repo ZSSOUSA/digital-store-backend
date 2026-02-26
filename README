@@ -1,28 +1,69 @@
-# Digital Store – Backend
+## Digital Store – Backend
 
-API REST do projeto **Digital Store** (atividade final do curso **Formação em Desenvolvedor Full Stack – Projeto Geração Tech**).
+API REST do projeto Digital Store (atividade final do curso Formação em Desenvolvedor Full Stack – Projeto Geração Tech).
 
-Gerencia:
-- Usuários
-- Categorias
-- Produtos
-- Autenticação (JWT)
+Se você só quer rodar e testar rápido: configure o `.env`, garanta o MySQL ligado e rode `npm run dev`.
 
-## Tecnologias
+## Começando rápido (3 passos)
+
+1) Crie o banco no MySQL (schema) e confirme que ele existe.
+2) Crie o arquivo `.env` em `backend/` (exemplo abaixo).
+3) Rode no terminal:
+
+npm install
+npm run dev
+
+
+Pronto: a API sobe em `http://localhost:3000`.
+
+## Tecnologias utilizadas
+
 - Node.js
 - Express
 - Sequelize
-- MySQL
-- JWT
+- MySQL (driver `mysql2`)
+- JWT (`jsonwebtoken`)
+- Criptografia de senha (`bcrypt`)
+- CORS (`cors`)
+- Variáveis de ambiente (`dotenv`)
+- Dev: `nodemon`
+- Testes (configurado): `jest`
+
+## O que este backend entrega
+
+Este backend provê:
+- Autenticação (JWT)
+- CRUD básico de usuários
+- Cadastro e consulta de categorias
+- Cadastro, busca e consulta de produtos (com imagens e opções)
+- Servir imagens estáticas via `/images`
+
+# Estrutura do projeto
+
+Organização (camadas):
+
+- `src/server.js`: inicialização do servidor e conexão com o banco
+- `src/app.js`: middlewares e registro de rotas
+- `src/routes/`: rotas HTTP (mapeamento de endpoints)
+- `src/controllers/`: controllers (recebem req/res e chamam services)
+- `src/services/`: regras de negócio/acesso aos models
+- `src/models/`: models Sequelize + associações
+- `src/middleware/`: middlewares (ex.: autenticação)
+- `src/images/`: imagens estáticas servidas em `/images`
+
 
 ## Pré-requisitos
+
 - Node.js + npm
 - MySQL rodando (local ou remoto)
 
-## Configuração (.env)
-Crie um arquivo `.env` na pasta `backend/` com:
+## Configuração de ambiente (.env)
 
-```env
+Crie um arquivo `.env` na pasta `backend/`.
+
+Exemplo:
+
+* .env
 DB_HOST=localhost
 DB_NAME=digital_store
 DB_USER=root
@@ -33,42 +74,55 @@ JWT_SECRET=sua_chave_secreta
 # opcionais
 PORT=3000
 CORS_ORIGIN=http://localhost:3001
-```
 
-Observações:
-- O banco de dados (schema) precisa existir no MySQL (`DB_NAME`).
-- As tabelas são criadas/atualizadas automaticamente ao iniciar (o projeto usa `sequelize.sync()`).
 
-## Como executar
+O que cada variável faz (sem mistério):
+
+- `DB_HOST`: host do MySQL
+- `DB_NAME`: nome do schema (banco)
+- `DB_USER` / `DB_PASS`: credenciais do MySQL
+- `JWT_SECRET`: segredo para assinar/verificar tokens (obrigatório)
+- `PORT`: porta HTTP da API (padrão 3000)
+- `CORS_ORIGIN`: origem permitida para CORS (frontend)
+
+
+## Setup do banco (MySQL)
+
+Observações importantes:
+
+- O **schema precisa existir** (o projeto não cria o schema automaticamente).
+- As **tabelas** são criadas/atualizadas automaticamente ao subir a API (via `sequelize.sync()`).
+
+Exemplo de criação do schema:
+
+sql
+CREATE DATABASE digital_store CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+
+
+
+## Como rodar
+
+Dentro da pasta `backend/`:
 
 Instalar dependências:
-```bash
-npm install
-```
 
-Rodar em desenvolvimento (recarrega com nodemon):
-```bash
+npm install
+
+
+Rodar em desenvolvimento (nodemon):
+
 npm run dev
-```
 
 Rodar em produção:
-```bash
+
 npm start
-```
 
-Ao subir, a API fica disponível em:
-- http://localhost:3000
+Depois de iniciar, a API fica disponível em `http://localhost:3000`.
 
-## Rotas principais
-Prefixo base: `/v1`
+## Onde ficam as rotas (sem listar endpoint por endpoint)
 
-- Auth: `/v1/auth`
-- Usuários: `/v1/user`
-- Categorias: `/v1/category`
-- Produtos: `/v1/product`
-
-Rotas protegidas exigem header:
-```http
-Authorization: Bearer <token>
-```
+- As rotas estão em `src/routes/`.
+- Elas são registradas no Express em `src/app.js`.
+- Por padrão, as rotas são montadas com prefixo `/v1`.
 
