@@ -60,7 +60,6 @@ src/
 └── images/          # Imagens estáticas servidas em /images
 ```
 
----
 
 ## Pré-requisitos
 
@@ -68,13 +67,11 @@ src/
 - npm
 - MySQL rodando (local ou remoto)
 
----
-
 ## Configuração de Ambiente
 
 Crie um arquivo `.env` na pasta `backend/`:
 
-```env
+env
 DB_HOST=localhost
 DB_NAME=digital_store
 DB_USER=root
@@ -85,23 +82,18 @@ JWT_SECRET=sua_chave_secreta
 # Opcionais
 PORT=3000
 CORS_ORIGIN=http://localhost:3001
-```
 
----
 
 ## Setup do Banco (MySQL)
 
 O schema precisa existir antes de subir a API (as tabelas são criadas automaticamente via `sequelize.sync()`):
 
-```sql
+sql
 CREATE DATABASE digital_store CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-```
 
----
 
 ## Como Executar
 
-```bash
 cd backend
 npm install
 
@@ -110,18 +102,15 @@ npm run dev
 
 # Produção
 npm start
-```
 
 A API sobe em `http://localhost:3000`.
 
----
 
 ## Autor
 
-- **Desenvolvedor:** Zaqueu Sousa
-- **GitHub:** [github.com/ZSSOUSA](https://github.com/ZSSOUSA)
+- **Desenvolvedor:** Zaqueu Silva
+- **GitHub:** (https://github.com/ZSSOUSA)
 
----
 
 ## Licença
 
