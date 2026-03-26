@@ -71,7 +71,7 @@ Endpoints protegidos exigem header: `Authorization: Bearer <token>`
 ---
 
 ## Estrutura do Projeto
-´´´
+```
 src/
 ├── app.js           # Middlewares e registro de rotas
 ├── server.js        # Inicialização do servidor e conexão com o banco
@@ -84,7 +84,7 @@ src/
 ├── middleware/
 │   └── authMiddleware.js  # Verificação de JWT
 └── images/          # Imagens estáticas servidas em /images
-´´´
+```
 
 
 ## Pré-requisitos
