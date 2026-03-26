@@ -1,6 +1,33 @@
 # Digital Store — Backend
 
+> **Desenvolvedor:** Zaqueu Silva — Formação Full Stack · Geração Tech
+
 API REST do projeto **Digital Store**, desenvolvido como atividade final do curso de **Formação em Desenvolvedor Full Stack – Projeto Geração Tech**.
+
+---
+
+## Preview da API
+
+![Visão geral dos endpoints da Digital Store API](docs/api-preview.svg)
+
+> Documentação interativa completa disponível em **`http://localhost:3000/api-docs`** (Swagger UI) após subir o servidor.
+
+---
+
+## Começando rápido (3 passos)
+
+1. Crie o banco no MySQL e confirme que o schema existe:
+   sql
+   CREATE DATABASE digital_store CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   
+2. Crie o arquivo `.env` em `backend/` (veja a seção [Configuração de Ambiente](#configuração-de-ambiente) abaixo).
+
+3. Rode no terminal:
+   npm install
+   npm run dev
+   
+
+A API sobe em `http://localhost:3000` e a documentação Swagger em `http://localhost:3000/api-docs`.
 
 ---
 
@@ -44,8 +71,7 @@ Endpoints protegidos exigem header: `Authorization: Bearer <token>`
 ---
 
 ## Estrutura do Projeto
-
-```
+´´´
 src/
 ├── app.js           # Middlewares e registro de rotas
 ├── server.js        # Inicialização do servidor e conexão com o banco
@@ -58,7 +84,7 @@ src/
 ├── middleware/
 │   └── authMiddleware.js  # Verificação de JWT
 └── images/          # Imagens estáticas servidas em /images
-```
+´´´
 
 
 ## Pré-requisitos
@@ -71,7 +97,7 @@ src/
 
 Crie um arquivo `.env` na pasta `backend/`:
 
-env
+.env
 DB_HOST=localhost
 DB_NAME=digital_store
 DB_USER=root
@@ -83,7 +109,6 @@ JWT_SECRET=sua_chave_secreta
 PORT=3000
 CORS_ORIGIN=http://localhost:3001
 
-
 ## Setup do Banco (MySQL)
 
 O schema precisa existir antes de subir a API (as tabelas são criadas automaticamente via `sequelize.sync()`):
@@ -94,6 +119,7 @@ CREATE DATABASE digital_store CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 ## Como Executar
 
+```bash
 cd backend
 npm install
 
@@ -102,6 +128,7 @@ npm run dev
 
 # Produção
 npm start
+```
 
 A API sobe em `http://localhost:3000`.
 

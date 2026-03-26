@@ -1,0 +1,98 @@
+<svg width="800" height="520" viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <!-- Background -->
+  <rect width="800" height="520" rx="12" fill="#0f172a"/>
+
+  <!-- Header bar -->
+  <rect x="0" y="0" width="800" height="64" rx="12" fill="#1e293b"/>
+  <rect x="0" y="52" width="800" height="12" fill="#1e293b"/>
+
+  <!-- Title -->
+  <text x="32" y="40" font-size="22" font-weight="700" fill="#f8fafc">Digital Store</text>
+  <text x="200" y="40" font-size="22" font-weight="400" fill="#94a3b8">— Backend API</text>
+  <text x="620" y="36" font-size="13" fill="#22c55e">● API running</text>
+  <text x="620" y="54" font-size="11" fill="#64748b">http://localhost:3000</text>
+
+  <!-- Base URL badge -->
+  <rect x="32" y="82" width="200" height="28" rx="6" fill="#1e3a5f"/>
+  <text x="44" y="100" font-size="12" fill="#60a5fa">Base URL: /v1</text>
+
+  <!-- Swagger badge -->
+  <rect x="248" y="82" width="180" height="28" rx="6" fill="#14532d"/>
+  <text x="260" y="100" font-size="12" fill="#4ade80">Docs: /api-docs (Swagger)</text>
+
+  <!-- ── AUTH ── -->
+  <rect x="32" y="128" width="740" height="26" rx="5" fill="#1e293b"/>
+  <text x="48" y="145" font-size="13" font-weight="700" fill="#94a3b8">🔐  AUTH</text>
+
+  <!-- POST /auth/login -->
+  <rect x="32" y="160" width="728" height="34" rx="6" fill="#1c1917"/>
+  <rect x="32" y="160" width="72" height="34" rx="6" fill="#854d0e"/>
+  <text x="46" y="182" font-size="13" font-weight="700" fill="#fef9c3">POST</text>
+  <text x="118" y="182" font-size="13" fill="#e2e8f0">/v1/auth/login</text>
+  <text x="380" y="182" font-size="12" fill="#94a3b8">Autenticar usuário e retornar JWT</text>
+  <rect x="690" y="167" width="68" height="20" rx="4" fill="#1e293b"/>
+  <text x="700" y="181" font-size="11" fill="#94a3b8">Público</text>
+
+  <!-- POST /auth/signup -->
+  <rect x="32" y="200" width="728" height="34" rx="6" fill="#1c1917"/>
+  <rect x="32" y="200" width="72" height="34" rx="6" fill="#854d0e"/>
+  <text x="46" y="222" font-size="13" font-weight="700" fill="#fef9c3">POST</text>
+  <text x="118" y="222" font-size="13" fill="#e2e8f0">/v1/auth/signup</text>
+  <text x="380" y="222" font-size="12" fill="#94a3b8">Cadastrar novo usuário</text>
+  <rect x="690" y="207" width="68" height="20" rx="4" fill="#1e293b"/>
+  <text x="700" y="221" font-size="11" fill="#94a3b8">Público</text>
+
+  <!-- ── PRODUCTS ── -->
+  <rect x="32" y="248" width="740" height="26" rx="5" fill="#1e293b"/>
+  <text x="48" y="265" font-size="13" font-weight="700" fill="#94a3b8">📦  PRODUTOS</text>
+
+  <!-- GET /products/search -->
+  <rect x="32" y="280" width="728" height="34" rx="6" fill="#1c1917"/>
+  <rect x="32" y="280" width="72" height="34" rx="6" fill="#065f46"/>
+  <text x="50" y="302" font-size="13" font-weight="700" fill="#a7f3d0">GET</text>
+  <text x="118" y="302" font-size="13" fill="#e2e8f0">/v1/product/search</text>
+  <text x="380" y="302" font-size="12" fill="#94a3b8">Buscar produtos com filtros (query params)</text>
+  <rect x="690" y="287" width="68" height="20" rx="4" fill="#1e293b"/>
+  <text x="700" y="301" font-size="11" fill="#94a3b8">Público</text>
+
+  <!-- GET /product/:id -->
+  <rect x="32" y="320" width="728" height="34" rx="6" fill="#1c1917"/>
+  <rect x="32" y="320" width="72" height="34" rx="6" fill="#065f46"/>
+  <text x="50" y="342" font-size="13" font-weight="700" fill="#a7f3d0">GET</text>
+  <text x="118" y="342" font-size="13" fill="#e2e8f0">/v1/product/:id</text>
+  <text x="380" y="342" font-size="12" fill="#94a3b8">Detalhe de um produto</text>
+  <rect x="690" y="327" width="68" height="20" rx="4" fill="#1e293b"/>
+  <text x="700" y="341" font-size="11" fill="#94a3b8">Público</text>
+
+  <!-- POST /product -->
+  <rect x="32" y="360" width="728" height="34" rx="6" fill="#1c1917"/>
+  <rect x="32" y="360" width="72" height="34" rx="6" fill="#854d0e"/>
+  <text x="46" y="382" font-size="13" font-weight="700" fill="#fef9c3">POST</text>
+  <text x="118" y="382" font-size="13" fill="#e2e8f0">/v1/product</text>
+  <text x="380" y="382" font-size="12" fill="#94a3b8">Criar novo produto</text>
+  <rect x="690" y="367" width="68" height="20" rx="4" fill="#1e40af"/>
+  <text x="698" y="381" font-size="11" fill="#93c5fd">🔒 JWT</text>
+
+  <!-- ── CATEGORIES / USERS ── -->
+  <rect x="32" y="408" width="356" height="26" rx="5" fill="#1e293b"/>
+  <text x="48" y="425" font-size="13" font-weight="700" fill="#94a3b8">🏷️  CATEGORIAS</text>
+
+  <rect x="32" y="440" width="356" height="34" rx="6" fill="#1c1917"/>
+  <rect x="32" y="440" width="72" height="34" rx="6" fill="#065f46"/>
+  <text x="50" y="462" font-size="13" font-weight="700" fill="#a7f3d0">GET</text>
+  <text x="118" y="462" font-size="13" fill="#e2e8f0">/v1/categories</text>
+  <text x="230" y="462" font-size="12" fill="#94a3b8">Listar categorias</text>
+
+  <rect x="404" y="408" width="368" height="26" rx="5" fill="#1e293b"/>
+  <text x="420" y="425" font-size="13" font-weight="700" fill="#94a3b8">👤  USUÁRIOS</text>
+
+  <rect x="404" y="440" width="360" height="34" rx="6" fill="#1c1917"/>
+  <rect x="404" y="440" width="72" height="34" rx="6" fill="#065f46"/>
+  <text x="422" y="462" font-size="13" font-weight="700" fill="#a7f3d0">GET</text>
+  <text x="490" y="462" font-size="13" fill="#e2e8f0">/v1/user/:id</text>
+  <text x="590" y="462" font-size="12" fill="#94a3b8">Dados do usuário</text>
+
+  <!-- Footer -->
+  <text x="32" y="506" font-size="11" fill="#475569">Desenvolvido por Zaqueu Silva  •  Geração Tech – Full Stack  •  2024</text>
+  <text x="680" y="506" font-size="11" fill="#475569">Node.js + Express + MySQL</text>
+</svg>
