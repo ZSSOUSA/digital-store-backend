@@ -23,9 +23,10 @@ API REST do projeto **Digital Store**, desenvolvido como atividade final do curs
 2. Crie o arquivo `.env` em `backend/` (veja a seção [Configuração de Ambiente](#configuração-de-ambiente) abaixo).
 
 3. Rode no terminal:
+   ```bash
    npm install
    npm run dev
-   
+   ```
 
 A API sobe em `http://localhost:3000` e a documentação Swagger em `http://localhost:3000/api-docs`.
 
@@ -120,7 +121,6 @@ CREATE DATABASE digital_store CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ## Como Executar
 
 ```bash
-cd backend
 npm install
 
 # Desenvolvimento (nodemon)
