@@ -9,32 +9,75 @@ const router = express.Router();
  * /v1/product/search:
  *   get:
  *     summary: Buscar produtos
- *     description: Retorna lista de produtos filtrados por query params (limit, page, fields, match, category_id, price-range).
+ *     description: >
+ *       Retorna produtos com paginação e filtros opcionais por texto
+ *       e categoria. A busca textual considera nome, slug e descrição.
  *     tags: [Produtos]
  *     parameters:
  *       - in: query
  *         name: limit
- *         schema: { type: integer }
- *         description: Quantidade de itens por página
+ *         schema:
+ *           type: integer
+ *           default: 12
+ *         description: >
+ *           Quantidade de produtos por página.
+ *           Informe -1 para retornar todos os produtos.
  *       - in: query
  *         name: page
- *         schema: { type: integer }
- *         description: Número da página
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Número da página.
+ *       - in: query
+ *         name: fields
+ *         schema:
+ *           type: string
+ *         description: >
+ *           Campos do produto que devem ser retornados,
+ *           separados por vírgula.
+ *         example: id,name,price
  *       - in: query
  *         name: match
- *         schema: { type: string }
- *         description: Texto para busca no nome/descrição
+ *         schema:
+ *           type: string
+ *         description: >
+ *           Texto pesquisado no nome, slug ou descrição do produto.
  *       - in: query
  *         name: category_ids
- *         schema: { type: string }
- *         description: IDs de categoria separados por vírgula
- *       - in: query
- *         name: price-range
- *         schema: { type: string }
- *         description: Faixa de preço (ex. 50-200)
+ *         schema:
+ *           type: string
+ *         description: IDs das categorias separados por vírgula.
+ *         example: 1,2
  *     responses:
  *       200:
- *         description: Lista de produtos
+ *         description: Busca realizada com sucesso.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     additionalProperties: true
+ *                   description: Lista de produtos encontrados.
+ *                 total:
+ *                   type: integer
+ *                   description: Quantidade total de produtos encontrados.
+ *                 limit:
+ *                   type: integer
+ *                   description: Limite aplicado à busca.
+ *                 page:
+ *                   type: integer
+ *                   description: Página atual.
+ *             example:
+ *               data: []
+ *               total: 0
+ *               limit: 12
+ *               page: 1
+ *       500:
+ *         description: Erro interno ao pesquisar produtos.
  */
 router.get('/product/search', ProductController.search);
 
@@ -48,12 +91,17 @@ router.get('/product/search', ProductController.search);
  *       - in: path
  *         name: id
  *         required: true
- *         schema: { type: integer }
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
- *         description: Dados do produto
+ *         description: Dados do produto.
+ *       400:
+ *         description: ID inválido.
  *       404:
- *         description: Produto não encontrado
+ *         description: Produto não encontrado.
+ *       500:
+ *         description: Erro interno ao consultar produto.
  */
 router.get('/product/:id', ProductController.findById);
 
@@ -71,16 +119,25 @@ router.get('/product/:id', ProductController.findById);
  *         application/json:
  *           schema:
  *             type: object
- *             required: [name, price]
+ *             required:
+ *               - name
+ *               - price
  *             properties:
- *               name: { type: string }
- *               price: { type: number }
- *               description: { type: string }
+ *               name:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               description:
+ *                 type: string
  *     responses:
  *       201:
- *         description: Produto criado
+ *         description: Produto criado.
+ *       400:
+ *         description: Dados inválidos.
  *       401:
- *         description: Não autorizado
+ *         description: Não autorizado.
+ *       500:
+ *         description: Erro interno ao criar produto.
  */
 router.post('/product', authMiddleware, ProductController.create);
 
@@ -96,12 +153,19 @@ router.post('/product', authMiddleware, ProductController.create);
  *       - in: path
  *         name: id
  *         required: true
- *         schema: { type: integer }
+ *         schema:
+ *           type: integer
  *     responses:
  *       204:
- *         description: Produto removido
+ *         description: Produto removido.
+ *       400:
+ *         description: ID inválido.
+ *       401:
+ *         description: Não autorizado.
  *       404:
- *         description: Produto não encontrado
+ *         description: Produto não encontrado.
+ *       500:
+ *         description: Erro interno ao excluir produto.
  */
 router.delete('/product/:id', authMiddleware, ProductController.delete);
 
