@@ -38,7 +38,8 @@
     "collectCoverageFrom": [
       "src/domain/**/*.js",
       "src/application/**/*.js",
-      "src/infrastructure/repositories/**/*.js"
+      "src/infrastructure/repositories/**/*.js",
+      "src/infrastructure/observability/**/*.js"
     ],
     "coverageThreshold": {
       "global": {
