@@ -1,109 +1,130 @@
-﻿# Digital Store â€” Backend API
+# Digital Store — Backend API
 
-API REST do projeto **Digital Store**, desenvolvido como projeto final da FormaÃ§Ã£o Full Stack â€” GeraÃ§Ã£o Tech.
+API REST do projeto **Digital Store**, desenvolvido como projeto final da Formação Full Stack — Geração Tech.
 
 **Desenvolvedor:** Zaqueu Silva
-**RepositÃ³rio:** https://github.com/ZSSOUSA/digital-store-backend
+**Repositório:** https://github.com/ZSSOUSA/digital-store-backend
 **Frontend:** https://github.com/ZSSOUSA/digital-store-frontend
 
 ## 1. Sobre o projeto
 
-O Digital Store Backend fornece serviÃ§os de API REST para uma aplicaÃ§Ã£o de comÃ©rcio eletrÃ´nico, incluindo gerenciamento de produtos, categorias, usuÃ¡rios e autenticaÃ§Ã£o.
+O Digital Store Backend fornece serviços de API REST para uma aplicação de comércio eletrônico, incluindo gerenciamento de produtos, categorias, usuários e autenticação.
 
-O projeto utiliza Node.js, Express, Sequelize e MySQL, com autenticaÃ§Ã£o baseada em JWT.
+O projeto utiliza Node.js, Express, Sequelize e MySQL, com autenticação baseada em JWT.
 
-A aplicaÃ§Ã£o foi estruturada para execuÃ§Ã£o em ambiente Docker, com banco de dados persistente e verificaÃ§Ãµes automatizadas de qualidade.
+A aplicação foi estruturada para execução em ambiente Docker, com banco de dados persistente e verificações automatizadas de qualidade.
 
 ## 2. Tecnologias utilizadas
 
 | Tecnologia | Finalidade |
 |---|---|
-| Node.js 22 | Ambiente de execuÃ§Ã£o |
+| Node.js 22 | Ambiente de execução |
 | Express 4 | Framework HTTP |
 | Sequelize 6 | ORM |
 | MySQL 8.4 | Banco de dados relacional |
 | mysql2 | Driver MySQL |
-| JWT | AutenticaÃ§Ã£o por token |
+| JWT | Autenticação por token |
 | bcrypt | Hash de senhas |
-| Docker | ContainerizaÃ§Ã£o |
-| Docker Compose | OrquestraÃ§Ã£o dos serviÃ§os |
+| Docker | Containerização |
+| Docker Compose | Orquestração dos serviços |
 | Jest | Testes automatizados |
 | Supertest | Testes HTTP |
-| ESLint | AnÃ¡lise estÃ¡tica de cÃ³digo |
-| Swagger / OpenAPI 3.0 | DocumentaÃ§Ã£o da API |
+| ESLint | Análise estática de código |
+| Swagger / OpenAPI 3.0 | Documentação da API |
 
-## 3. Arquitetura e organizaÃ§Ã£o
+## 3. Arquitetura e organização
 
-O projeto utiliza uma organizaÃ§Ã£o em camadas, separando responsabilidades da aplicaÃ§Ã£o.
+O projeto utiliza uma organização em camadas, separando responsabilidades da aplicação.
 
 ```text
 digital-store-backend/
-â”‚
-â”œâ”€â”€ .github/
-â”‚   â””â”€â”€ workflows/
-â”‚       â””â”€â”€ ci.yml
-â”‚
-â”œâ”€â”€ docs/
-â”‚   â””â”€â”€ api-preview.svg
-â”‚
-â”œâ”€â”€ src/
-â”‚   â”œâ”€â”€ config/
-â”‚   â”‚   â”œâ”€â”€ database.js
-â”‚   â”‚   â””â”€â”€ swagger.js
-â”‚   â”‚
-â”‚   â”œâ”€â”€ controllers/
-â”‚   â”œâ”€â”€ services/
-â”‚   â”œâ”€â”€ models/
-â”‚   â”œâ”€â”€ routes/
-â”‚   â”œâ”€â”€ middleware/
-â”‚   â”œâ”€â”€ images/
-â”‚   â”‚
-â”‚   â”œâ”€â”€ infrastructure/
-â”‚   â”‚   â””â”€â”€ observability/
-â”‚   â”‚       â”œâ”€â”€ logger.js
-â”‚   â”‚       â””â”€â”€ metrics.js
-â”‚   â”‚
-â”‚   â”œâ”€â”€ app.js
-â”‚   â””â”€â”€ server.js
-â”‚
-â”œâ”€â”€ tests/
-â”‚   â”œâ”€â”€ application/
-â”‚   â”œâ”€â”€ domain/
-â”‚   â”œâ”€â”€ infrastructure/
-â”‚   â””â”€â”€ config/
-â”‚
-â”œâ”€â”€ .env.example
-â”œâ”€â”€ .gitignore
-â”œâ”€â”€ Dockerfile
-â”œâ”€â”€ docker-compose.yml
-â”œâ”€â”€ eslint.config.js
-â”œâ”€â”€ package.json
-â””â”€â”€ README.md
+│
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
+├── docs/
+│   ├── adr/
+│   │   └── 0001-decisoes-arquiteturais.md
+│   ├── api-preview.svg
+│   ├── desempenho.md
+│   └── ia.md
+│
+├── performance/
+│   └── products-smoke.js
+│
+├── src/
+│   ├── application/
+│   │   └── use-cases/
+│   │       └── CreateProductUseCase.js
+│   ├── config/
+│   │   ├── database.js
+│   │   └── swagger.js
+│   ├── controllers/
+│   ├── domain/
+│   │   └── entities/
+│   │       └── Product.js
+│   ├── images/
+│   ├── infrastructure/
+│   │   ├── observability/
+│   │   │   ├── logger.js
+│   │   │   └── metrics.js
+│   │   └── repositories/
+│   │       └── SequelizeProductRepository.js
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── services/
+│   ├── app.js
+│   └── server.js
+│
+├── tests/
+│   ├── application/
+│   │   └── use-cases/
+│   ├── config/
+│   ├── domain/
+│   │   └── entities/
+│   └── infrastructure/
+│       ├── observability/
+│       └── repositories/
+│
+├── .dockerignore
+├── .env.example
+├── .gitignore
+├── CONTRIBUTORS.md
+├── Dockerfile
+├── docker-compose.yml
+├── eslint.config.js
+├── package-lock.json
+├── package.json
+└── README.md
 ```
-
 ### Responsabilidades principais
 
-- **Controllers:** recebem as requisiÃ§Ãµes HTTP e coordenam as respostas.
-- **Services:** concentram operaÃ§Ãµes e regras da aplicaÃ§Ã£o.
+- **Application/Use Cases:** organiza os casos de uso da aplicação, incluindo a criação de produtos.
+- **Domain:** concentra entidades e regras fundamentais do domínio.
+- **Infrastructure/Repositories:** implementa o acesso e a persistência de dados.
+- **Controllers:** recebem as requisições HTTP e coordenam as respostas.
+- **Services:** concentram operações e regras da aplicação.
 - **Models:** representam as entidades persistidas pelo Sequelize.
 - **Routes:** definem os endpoints da API.
-- **Middleware:** executa verificaÃ§Ãµes intermediÃ¡rias, incluindo autenticaÃ§Ã£o.
-- **Config:** concentra configuraÃ§Ãµes de banco de dados e documentaÃ§Ã£o.
-- **Infrastructure/Observability:** implementa logs estruturados e mÃ©tricas HTTP.
-- **Tests:** contÃ©m testes automatizados das funcionalidades e integraÃ§Ãµes.
+- **Middleware:** executa verificações intermediárias, incluindo autenticação.
+- **Config:** concentra configurações de banco de dados e documentação.
+- **Infrastructure/Observability:** implementa logs estruturados e métricas HTTP.
+- **Tests:** contém testes automatizados das funcionalidades e integrações.
 
-## 4. PrÃ©-requisitos
+## 4. Pré-requisitos
 
 Para executar o projeto:
 
-- Docker Desktop instalado e em execuÃ§Ã£o.
-- Docker Compose disponÃ­vel.
+- Docker Desktop instalado e em execução.
+- Docker Compose disponível.
 - Git.
 - Node.js 22 e npm, caso queira executar os comandos de desenvolvimento e testes fora dos containers.
 
-## 5. ConfiguraÃ§Ã£o do ambiente
+## 5. Configuração do ambiente
 
-O projeto utiliza variÃ¡veis de ambiente para evitar credenciais diretamente no cÃ³digo.
+O projeto utiliza variáveis de ambiente para evitar credenciais diretamente no código.
 
 Crie seu arquivo `.env` a partir do exemplo:
 
@@ -129,13 +150,13 @@ JWT_SECRET=sua_chave_secreta_longa_e_aleatoria
 CORS_ORIGIN=http://localhost:3001
 ```
 
-**Importante:** substitua os valores de exemplo por credenciais prÃ³prias.
+**Importante:** substitua os valores de exemplo por credenciais próprias.
 
-O arquivo `.env` nÃ£o deve ser enviado ao Git. Utilize `.env.example` para documentar as variÃ¡veis necessÃ¡rias.
+O arquivo `.env` não deve ser enviado ao Git. Utilize `.env.example` para documentar as variáveis necessárias.
 
 ## 6. Como executar com Docker Compose
 
-A execuÃ§Ã£o principal utiliza Docker Compose.
+A execução principal utiliza Docker Compose.
 
 Na raiz do projeto, execute:
 
@@ -145,10 +166,10 @@ docker compose up -d --build
 
 Esse comando:
 
-1. ConstrÃ³i a imagem da API.
+1. Constrói a imagem da API.
 2. Inicializa o banco MySQL 8.4.
-3. Aguarda a verificaÃ§Ã£o de saÃºde do banco.
-4. Inicia a API apÃ³s o banco estar disponÃ­vel.
+3. Aguarda a verificação de saúde do banco.
+4. Inicia a API após o banco estar disponível.
 
 Para verificar os containers:
 
@@ -162,24 +183,24 @@ Para acompanhar os logs:
 docker compose logs -f api
 ```
 
-Para parar os serviÃ§os:
+Para parar os serviços:
 
 ```powershell
 docker compose down
 ```
 
-O banco utiliza o volume persistente `digital_store_data`, preservando os dados quando os containers sÃ£o parados.
+O banco utiliza o volume persistente `digital_store_data`, preservando os dados quando os containers são parados.
 
-**AtenÃ§Ã£o:** nÃ£o utilize `docker compose down -v` se quiser preservar os dados do banco.
+**Atenção:** não utilize `docker compose down -v` se quiser preservar os dados do banco.
 
-## 7. EndereÃ§os da aplicaÃ§Ã£o
+## 7. Endereços da aplicação
 
-| ServiÃ§o | EndereÃ§o |
+| Serviço | Endereço |
 |---|---|
 | API | http://localhost:3000 |
 | Rota principal | http://localhost:3000/ |
 | Swagger UI | http://localhost:3000/api-docs |
-| MÃ©tricas | http://localhost:3000/metrics |
+| Métricas | http://localhost:3000/metrics |
 | MySQL (porta do host) | localhost:3307 |
 
 ## 8. Endpoints principais
@@ -192,57 +213,57 @@ http://localhost:3000/v1
 
 ### Produtos
 
-| MÃ©todo | Endpoint | DescriÃ§Ã£o | AutenticaÃ§Ã£o |
+| Método | Endpoint | Descrição | Autenticação |
 |---|---|---|---|
-| GET | `/v1/product/search` | Busca produtos com filtros | NÃ£o |
-| GET | `/v1/product/:id` | Consulta produto por ID | NÃ£o |
+| GET | `/v1/product/search` | Busca produtos com filtros | Não |
+| GET | `/v1/product/:id` | Consulta produto por ID | Não |
 | POST | `/v1/product` | Cria produto | Sim |
 | DELETE | `/v1/product/:id` | Remove produto | Sim |
 
-Os endpoints protegidos exigem o cabeÃ§alho:
+Os endpoints protegidos exigem o cabeçalho:
 
 ```http
 Authorization: Bearer SEU_TOKEN_JWT
 ```
 
-O token Ã© obtido pelo endpoint de autenticaÃ§Ã£o:
+O token é obtido pelo endpoint de autenticação:
 
 ```text
 POST /v1/auth/login
 ```
 
-Consulte a documentaÃ§Ã£o Swagger para visualizar os parÃ¢metros e respostas disponÃ­veis.
+Consulte a documentação Swagger para visualizar os parâmetros e respostas disponíveis.
 
-## 9. DocumentaÃ§Ã£o OpenAPI / Swagger
+## 9. Documentação OpenAPI / Swagger
 
-A API possui documentaÃ§Ã£o interativa baseada no padrÃ£o OpenAPI 3.0.
+A API possui documentação interativa baseada no padrão OpenAPI 3.0.
 
-Com a aplicaÃ§Ã£o em execuÃ§Ã£o, acesse:
+Com a aplicação em execução, acesse:
 
 http://localhost:3000/api-docs
 
-A documentaÃ§Ã£o permite visualizar os endpoints, parÃ¢metros, respostas e requisitos de autenticaÃ§Ã£o.
+A documentação permite visualizar os endpoints, parâmetros, respostas e requisitos de autenticação.
 
 ## 10. Observabilidade
 
-O projeto possui recursos bÃ¡sicos de observabilidade.
+O projeto possui recursos básicos de observabilidade.
 
 ### Logs estruturados
 
-Os registros sÃ£o emitidos em formato JSON, contendo:
+Os registros são emitidos em formato JSON, contendo:
 
 - Timestamp.
-- NÃ­vel do registro.
+- Nível do registro.
 - Mensagem.
-- Contexto adicional, quando aplicÃ¡vel.
+- Contexto adicional, quando aplicável.
 
-Os nÃ­veis implementados sÃ£o:
+Os níveis implementados são:
 
 - `info`
 - `warn`
 - `error`
 
-### MÃ©tricas HTTP
+### Métricas HTTP
 
 O endpoint:
 
@@ -250,19 +271,19 @@ O endpoint:
 GET /metrics
 ```
 
-apresenta a mÃ©trica:
+apresenta a métrica:
 
 ```text
 http_request_duration_ms
 ```
 
-SÃ£o armazenadas as Ãºltimas 1.000 amostras de duraÃ§Ã£o das requisiÃ§Ãµes HTTP.
+São armazenadas as últimas 1.000 amostras de duração das requisições HTTP.
 
-O sistema calcula o percentil 95 (p95) e compara o resultado com o objetivo de nÃ­vel de serviÃ§o:
+O sistema calcula o percentil 95 (p95) e compara o resultado com o objetivo de nível de serviço:
 
-**SLO:** 95% das requisiÃ§Ãµes em atÃ© 500 ms.
+**SLO:** 95% das requisições em até 500 ms.
 
-As mediÃ§Ãµes sÃ£o mantidas em memÃ³ria e reiniciadas quando a aplicaÃ§Ã£o reinicia.
+As medições são mantidas em memória e reiniciadas quando a aplicação reinicia.
 
 ## 11. Testes automatizados
 
@@ -288,18 +309,18 @@ npx jest tests/infrastructure/observability --runInBand
 
 ### Cobertura configurada
 
-Os limites globais definidos no Jest sÃ£o:
+Os limites globais definidos no Jest são:
 
-| Indicador | Limite mÃ­nimo |
+| Indicador | Limite mínimo |
 |---|---:|
 | Statements | 90% |
 | Branches | 80% |
 | Functions | 100% |
 | Lines | 90% |
 
-## 12. Qualidade de cÃ³digo
+## 12. Qualidade de código
 
-O projeto utiliza ESLint para anÃ¡lise estÃ¡tica.
+O projeto utiliza ESLint para análise estática.
 
 Executar:
 
@@ -307,26 +328,26 @@ Executar:
 npm run lint
 ```
 
-## 13. IntegraÃ§Ã£o contÃ­nua (CI)
+## 13. Integração contínua (CI)
 
-O projeto utiliza GitHub Actions para automatizar verificaÃ§Ãµes em eventos de push e pull request direcionados Ã  branch `main`.
+O projeto utiliza GitHub Actions para automatizar verificações em eventos de push e pull request direcionados à branch `main`.
 
 O workflow executa:
 
-1. Checkout do repositÃ³rio.
-2. ConfiguraÃ§Ã£o do Node.js.
-3. InstalaÃ§Ã£o de dependÃªncias com `npm ci`.
-4. ExecuÃ§Ã£o do ESLint.
+1. Checkout do repositório.
+2. Configuração do Node.js.
+3. Instalação de dependências com `npm ci`.
+4. Execução do ESLint.
 5. Testes automatizados com cobertura.
 
-Arquivo de configuraÃ§Ã£o:
+Arquivo de configuração:
 
 ```text
 .github/workflows/ci.yml
 ```
 
-## 14. LicenÃ§a
+## 14. Licença
 
-Projeto acadÃªmico desenvolvido como parte da FormaÃ§Ã£o Full Stack â€” GeraÃ§Ã£o Tech.
+Projeto acadêmico desenvolvido como parte da Formação Full Stack — Geração Tech.
 
-A licenÃ§a declarada no `package.json` Ã© ISC.
+A licença declarada no `package.json` é ISC.
