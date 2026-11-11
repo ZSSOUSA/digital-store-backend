@@ -193,6 +193,8 @@ O banco utiliza o volume persistente `digital_store_data`, preservando os dados 
 
 **Atenção:** não utilize `docker compose down -v` se quiser preservar os dados do banco.
 
+**Execução fora do Docker:** é possível iniciar a aplicação utilizando `npm start` ou executar em modo de desenvolvimento com `npm run dev`. Nesse cenário, configure as variáveis de ambiente para que a aplicação consiga acessar o MySQL. Se utilizar o banco disponibilizado pelo Docker Compose, o acesso pelo Windows deve utilizar `localhost` e a porta `3307`, em vez de `db:3306`.
+
 ## 7. Endereços da aplicação
 
 | Serviço | Endereço |
@@ -211,14 +213,37 @@ Base URL:
 http://localhost:3000/v1
 ```
 
+### Autenticação
+
+| Método | Endpoint | Descrição | Autenticação |
+|---|---|---|---|
+| POST | `/v1/user/token` | Autenticar usuário e gerar JWT | Não |
+
+### Usuários
+
+| Método | Endpoint | Descrição | Autenticação |
+|---|---|---|---|
+| POST | `/v1/user` | Cadastrar usuário | Não |
+| GET | `/v1/user/:id` | Consultar usuário por ID | Não |
+| PUT | `/v1/user/:id` | Atualizar usuário | Sim |
+| DELETE | `/v1/user/:id` | Remover usuário | Sim |
+
+### Categorias
+
+| Método | Endpoint | Descrição | Autenticação |
+|---|---|---|---|
+| GET | `/v1/category/search` | Listar categorias | Não |
+| GET | `/v1/category/:id` | Consultar categoria por ID | Não |
+| POST | `/v1/category` | Criar categoria | Sim |
+
 ### Produtos
 
 | Método | Endpoint | Descrição | Autenticação |
 |---|---|---|---|
-| GET | `/v1/product/search` | Busca produtos com filtros | Não |
-| GET | `/v1/product/:id` | Consulta produto por ID | Não |
-| POST | `/v1/product` | Cria produto | Sim |
-| DELETE | `/v1/product/:id` | Remove produto | Sim |
+| GET | `/v1/product/search` | Buscar produtos com filtros | Não |
+| GET | `/v1/product/:id` | Consultar produto por ID | Não |
+| POST | `/v1/product` | Criar produto | Sim |
+| DELETE | `/v1/product/:id` | Remover produto por ID | Sim |
 
 Os endpoints protegidos exigem o cabeçalho:
 
@@ -226,13 +251,13 @@ Os endpoints protegidos exigem o cabeçalho:
 Authorization: Bearer SEU_TOKEN_JWT
 ```
 
-O token é obtido pelo endpoint de autenticação:
+O token é obtido pelo endpoint:
 
 ```text
 POST /v1/user/token
 ```
 
-Consulte a documentação Swagger para visualizar os parâmetros e respostas disponíveis.
+Consulte a documentação Swagger para visualizar os parâmetros, exemplos de requisições e respostas disponíveis.
 
 ## 9. Documentação OpenAPI / Swagger
 
