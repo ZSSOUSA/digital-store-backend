@@ -229,7 +229,7 @@ Authorization: Bearer SEU_TOKEN_JWT
 O token é obtido pelo endpoint de autenticação:
 
 ```text
-POST /v1/auth/login
+POST /v1/user/token
 ```
 
 Consulte a documentação Swagger para visualizar os parâmetros e respostas disponíveis.

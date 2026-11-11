@@ -6,7 +6,7 @@ const options = {
     info: {
       title: 'Digital Store API',
       version: '1.0.0',
-      description: 'API REST do projeto Digital Store – Formação Full Stack Geração Tech.\n\nEndpoints protegidos exigem header **Authorization: Bearer {token}** (obtido via `/v1/auth/login`).',
+      description: 'API REST do projeto Digital Store – Formação Full Stack Geração Tech.\n\nEndpoints protegidos exigem header **Authorization: Bearer {token}** (obtido via `/v1/user/token`).',
       contact: {
         name: 'Zaqueu Silva',
         url: 'https://github.com/ZSSOUSA',
