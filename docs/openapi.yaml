@@ -1,0 +1,576 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Digital Store API",
+    "version": "1.0.0",
+    "description": "API REST do projeto Digital Store – Formação Full Stack Geração Tech.\n\nEndpoints protegidos exigem header **Authorization: Bearer {token}** (obtido via `/v1/user/token`).",
+    "contact": {
+      "name": "Zaqueu Silva",
+      "url": "https://github.com/ZSSOUSA"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Desenvolvimento"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/v1/user/token": {
+      "post": {
+        "summary": "Autenticar usuário",
+        "description": "Recebe e-mail e senha e retorna um JWT.",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "usuario@email.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "minhaSenha123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token JWT gerado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "E-mail ou senha inválidos"
+          }
+        }
+      }
+    },
+    "/v1/category/search": {
+      "get": {
+        "summary": "Listar categorias",
+        "tags": [
+          "Categorias"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de categorias"
+          }
+        }
+      }
+    },
+    "/v1/category/{id}": {
+      "get": {
+        "summary": "Detalhe de categoria",
+        "tags": [
+          "Categorias"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dados da categoria"
+          },
+          "404": {
+            "description": "Categoria não encontrada"
+          }
+        }
+      }
+    },
+    "/v1/category": {
+      "post": {
+        "summary": "Criar categoria",
+        "tags": [
+          "Categorias"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "slug": {
+                    "type": "string"
+                  },
+                  "use_in_menu": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Categoria criada"
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/v1/product/search": {
+      "get": {
+        "summary": "Buscar produtos",
+        "description": "Retorna produtos com paginação e filtros opcionais por texto e categoria. A busca textual considera nome, slug e descrição.\n",
+        "tags": [
+          "Produtos"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 12
+            },
+            "description": "Quantidade de produtos por página. Informe -1 para retornar todos os produtos.\n"
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Número da página."
+          },
+          {
+            "in": "query",
+            "name": "fields",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Campos do produto que devem ser retornados, separados por vírgula.\n",
+            "example": "id,name,price"
+          },
+          {
+            "in": "query",
+            "name": "match",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Texto pesquisado no nome, slug ou descrição do produto.\n"
+          },
+          {
+            "in": "query",
+            "name": "category_ids",
+            "schema": {
+              "type": "string"
+            },
+            "description": "IDs das categorias separados por vírgula.",
+            "example": "1,2"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Busca realizada com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                      },
+                      "description": "Lista de produtos encontrados."
+                    },
+                    "total": {
+                      "type": "integer",
+                      "description": "Quantidade total de produtos encontrados."
+                    },
+                    "limit": {
+                      "type": "integer",
+                      "description": "Limite aplicado à busca."
+                    },
+                    "page": {
+                      "type": "integer",
+                      "description": "Página atual."
+                    }
+                  }
+                },
+                "example": {
+                  "data": [],
+                  "total": 0,
+                  "limit": 12,
+                  "page": 1
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno ao pesquisar produtos."
+          }
+        }
+      }
+    },
+    "/v1/product/{id}": {
+      "get": {
+        "summary": "Detalhe de produto",
+        "tags": [
+          "Produtos"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dados do produto."
+          },
+          "400": {
+            "description": "ID inválido."
+          },
+          "404": {
+            "description": "Produto não encontrado."
+          },
+          "500": {
+            "description": "Erro interno ao consultar produto."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remover produto",
+        "tags": [
+          "Produtos"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Produto removido."
+          },
+          "400": {
+            "description": "ID inválido."
+          },
+          "401": {
+            "description": "Não autorizado."
+          },
+          "404": {
+            "description": "Produto não encontrado."
+          },
+          "500": {
+            "description": "Erro interno ao excluir produto."
+          }
+        }
+      }
+    },
+    "/v1/product": {
+      "post": {
+        "summary": "Criar produto",
+        "tags": [
+          "Produtos"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "price"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Produto criado."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "401": {
+            "description": "Não autorizado."
+          },
+          "500": {
+            "description": "Erro interno ao criar produto."
+          }
+        }
+      }
+    },
+    "/v1/user": {
+      "post": {
+        "summary": "Cadastrar usuário",
+        "tags": [
+          "Usuários"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "firstname",
+                  "surname",
+                  "email",
+                  "password",
+                  "confirmPassword"
+                ],
+                "properties": {
+                  "firstname": {
+                    "type": "string",
+                    "example": "João"
+                  },
+                  "surname": {
+                    "type": "string",
+                    "example": "Silva"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "joao@email.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "senha123"
+                  },
+                  "confirmPassword": {
+                    "type": "string",
+                    "example": "senha123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuário criado"
+          },
+          "400": {
+            "description": "Dados inválidos"
+          }
+        }
+      }
+    },
+    "/v1/user/{id}": {
+      "get": {
+        "summary": "Buscar usuário por ID",
+        "tags": [
+          "Usuários"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dados do usuário"
+          },
+          "401": {
+            "description": "Token não enviado ou inválido"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualizar usuário",
+        "tags": [
+          "Usuários"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstname": {
+                    "type": "string"
+                  },
+                  "surname": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Usuário atualizado"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remover usuário",
+        "tags": [
+          "Usuários"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Usuário removido"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}
