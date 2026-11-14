@@ -1,6 +1,8 @@
 # Digital Store — Backend API
 
-API REST do projeto **Digital Store**, desenvolvido como projeto final da Formação Full Stack — Geração Tech.
+**Projeto Final: Projeto B — Nível Simples**
+
+API REST desenvolvida como projeto final da Formação Fullcycle — Geração Tech, com foco em arquitetura, segurança, testes automatizados, CI/CD e observabilidade.
 
 **Desenvolvedor:** Zaqueu Silva
 **Repositório:** https://github.com/ZSSOUSA/digital-store-backend
@@ -48,7 +50,8 @@ digital-store-backend/
 │   │   └── 0001-decisoes-arquiteturais.md
 │   ├── api-preview.svg
 │   ├── desempenho.md
-│   └── ia.md
+│   ├── ia.md
+│   └── openapi.yaml
 │
 ├── performance/
 │   └── products-smoke.js
@@ -224,7 +227,7 @@ http://localhost:3000/v1
 | Método | Endpoint | Descrição | Autenticação |
 |---|---|---|---|
 | POST | `/v1/user` | Cadastrar usuário | Não |
-| GET | `/v1/user/:id` | Consultar usuário por ID | Não |
+| GET | `/v1/user/:id` | Consultar usuário por ID | Sim |
 | PUT | `/v1/user/:id` | Atualizar usuário | Sim |
 | DELETE | `/v1/user/:id` | Remover usuário | Sim |
 
@@ -268,6 +271,11 @@ Com a aplicação em execução, acesse:
 http://localhost:3000/api-docs
 
 A documentação permite visualizar os endpoints, parâmetros, respostas e requisitos de autenticação.
+
+O arquivo da especificação está disponível em:
+
+`docs/openapi.yaml`
+
 
 ## 10. Observabilidade
 

@@ -27,7 +27,7 @@ A ferramenta foi utilizada nas seguintes atividades:
 
 ## 4. Exemplos de prompts utilizados
 
-Os exemplos abaixo representam solicitações utilizadas durante o desenvolvimento:
+Os exemplos abaixo representam prompts utilizados ou adaptados durante o desenvolvimento do projetoutilizadas durante o desenvolvimento:
 
 ### Arquitetura e organização
 

@@ -24,6 +24,8 @@ O objetivo é verificar se o endpoint de busca de produtos responde corretamente
 | Limite de p95 | Menor que 500 ms |
 | Limite de falhas | Inferior a 1% |
 
+As verificações foram realizadas por meio de checks do k6, validando o status HTTP 200. Os limites de desempenho foram definidos por thresholds, incluindo p95 inferior a 500 ms e taxa de falhas HTTP inferior a 1%.
+
 ## 4. Resultados obtidos
 
 O teste foi executado com sucesso e apresentou os seguintes resultados:
