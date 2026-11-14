@@ -31,24 +31,31 @@ const router = express.Router();
  */
 router.post('/user', UserController.create);
 
+
 /**
  * @swagger
  * /v1/user/{id}:
  *   get:
  *     summary: Buscar usuário por ID
  *     tags: [Usuários]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         schema: { type: integer }
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
  *         description: Dados do usuário
+ *       401:
+ *         description: Token não enviado ou inválido
  *       404:
  *         description: Usuário não encontrado
  */
-router.get('/user/:id', UserController.findById);
+router.get('/user/:id', authMiddleware, UserController.findById);
+
 
 /**
  * @swagger
